@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 数据源的配置，使用C3P0连接池，用户名和密码需要根据实际情况配置 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db_account"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="123123"></property>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- hibernate核心配置 -->
+        <property name="hibernateProperties">
+            <props>
+                <!-- 是否需要打印sql语句 -->
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- 是否对打印的sql语句进行格式化（容易阅读） -->
+                <prop key="hibernate.format_sql">true</prop>
+                <!-- 是否自动创建表，update:若表存在则更新，不存在则自动创建 -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <!-- hibernate映射文件的引入 -->
+        <property name="mappingResources">
+            <list>
+                <value>com/cc/hibernate/POJO/User.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!-- 开启事务注解 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- 配置hibernateTemplate -->
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <!-- 管理struts2的action对象，scope="prototype"表示多例 -->
+    <bean id="loginAction" class="com.cc.Action.LoginAction" scope="prototype">
+        <property name="userService" ref="userService"></property>
+    </bean>
+    <bean id="registerAction" class="com.cc.Action.LoginAction" scope="prototype">
+        <property name="userService" ref="userService"></property>
+    </bean>
+
+    <bean id="userService" class="com.cc.Service.UserService">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+    <bean id="userDao" class="com.cc.Dao.UserDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+</beans>

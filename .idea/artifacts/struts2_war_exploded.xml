@@ -12,6 +12,11 @@
           <element id="library" level="project" name="javassist-3.23.1-GA" />
           <element id="library" level="project" name="mysql-connector-java-5.1.47" />
           <element id="library" level="project" name="Hibernate 5.3.7-5.3.7" />
+          <element id="library" level="project" name="Spring-4.3.18.RELEASE" />
+          <element id="library" level="project" name="c3p0-0.9.5.2" />
+          <element id="library" level="project" name="spring-web-5.1.1.RELEASE" />
+          <element id="library" level="project" name="mchange-commons-java-0.2.15" />
+          <element id="library" level="project" name="struts2-spring-plugin-2.5.18" />
         </element>
       </element>
     </root>

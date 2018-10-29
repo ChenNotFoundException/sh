@@ -13,5 +13,6 @@
   <body>
   <h1>尚未注册！请注册!!!</h1>
   <h2>请<a href="register.jsp">点此注册</a> </h2>
+  <h3>已有账号？<a href="login.jsp">去登陆！</a> </h3>
   </body>
 </html>

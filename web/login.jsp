@@ -12,7 +12,7 @@
 <head>
     <title>登录界面</title>
 </head>
-<body><s:form action="loginaction" namespace="/">
+<body><s:form action="loginAction" namespace="/">
   <s:textfield name="username" style="font-size:12px;width:120px;" label="登陆名称" />
            <s:password name="password" style="font-size:12px;width:120px;" label="登陆密码" />
                    <s:submit value="登陆" />

@@ -12,9 +12,9 @@
     <title>注册</title>
 </head>
 <body>
-<s:form action="register" namespace="/">
-    <s:textfield  align="center" name="username" style="font-size:12px;width:120px;" label="登陆名称" />
-    <s:password  align="center" name="password" style="font-size:12px;width:120px;" label="登陆密码" />
+<s:form action="registerAction" namespace="/">
+    <s:textfield  align="center" name="username" style="font-size:12px;width:120px;" label="注册用户名" />
+    <s:password  align="center" name="password" style="font-size:12px;width:120px;" label="注册密码" />
     <s:submit  align="center" value="注册" />
 </s:form>
 </body>

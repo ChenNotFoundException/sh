@@ -5,13 +5,19 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
+    <!-- struts2 action 交由spring管理 -->
+    <constant name="struts.objectFactory" value="spring" />
+
+    <constant name="struts.devMode" value="true"></constant>
+    <!--class属性中不写action的路径，因为在spring已经配置过了，应该写spring中bean的id-->
     <package name="default" extends="struts-default" namespace="/">
-        <action name="loginaction" class="com.cc.struts.Action.LoginAction" method="execute">
+        <action name="loginAction" class="loginAction" method="execute">
             <result name="success">/success.jsp</result>
-            <result name="fail" >/fail.jsp</result>
+            <result name="error" >/fail.jsp</result>
         </action>
-        <action name="register" class="com.cc.struts.Action.LoginAction" method="register">
-            <result name="login">/success.jsp</result>
+        <action name="registerAction" class="registerAction" method="register">
+            <result name="success">/success.jsp</result>
+            <result name="error">/index.jsp</result>
         </action>
     </package>
 
