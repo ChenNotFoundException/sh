@@ -1,4 +1,4 @@
-package com.cc.hibernate.POJO;
+package com.cc.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -6,17 +6,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_account", schema = "db_account")
 public class User {
-    private int id;
+    private Integer id;
     private String user;
     private String paw;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -45,7 +45,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
+        return Objects.equals(id, user.id) &&
                 Objects.equals(this.user, user.user) &&
                 Objects.equals(paw, user.paw);
     }

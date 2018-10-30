@@ -1,6 +1,8 @@
 package com.cc.Dao;
 
-import com.cc.hibernate.POJO.User;
+import com.cc.entity.User;
+
+import java.util.List;
 
 /**
  * @author chenchen
@@ -14,4 +16,6 @@ public interface UserDao {
     public boolean exist(String username);
 
     public boolean verify(String username, String password);
+
+    public List<User> findAll();
 }

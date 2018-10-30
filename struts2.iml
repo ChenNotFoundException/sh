@@ -52,5 +52,7 @@
     <orderEntry type="library" name="spring-web-5.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="mchange-commons-java-0.2.15" level="project" />
     <orderEntry type="library" name="struts2-spring-plugin-2.5.18" level="project" />
+    <orderEntry type="library" name="jsp-api" level="project" />
+    <orderEntry type="library" name="servlet-api" level="project" />
   </component>
 </module>

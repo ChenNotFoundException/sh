@@ -1,6 +1,7 @@
 package com.cc.Dao;
 
-import com.cc.hibernate.POJO.User;
+import com.cc.entity.User;
+
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -42,5 +43,10 @@ public class UserDaoImpl implements UserDao {
     public boolean verify(String username, String password) {
         List list = hibernateTemplate.find("select paw from User u where u.user =?0", username);
         return (list.get(0).toString()).equals(password);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return (List<User>)hibernateTemplate.find("from User u");
     }
 }

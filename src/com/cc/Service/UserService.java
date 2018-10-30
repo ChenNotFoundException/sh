@@ -1,11 +1,13 @@
 package com.cc.Service;
 
 import com.cc.Dao.UserDao;
-import com.cc.hibernate.POJO.User;
+
+import com.cc.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author chenchen
@@ -39,4 +41,8 @@ public class UserService {
         System.out.println("注册。。。。");
         return userDao.addUser(user);
     }
+    public List<User> find(){
+        return userDao.findAll();
+    }
+
 }

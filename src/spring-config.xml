@@ -37,7 +37,7 @@
         <!-- hibernate映射文件的引入 -->
         <property name="mappingResources">
             <list>
-                <value>com/cc/hibernate/POJO/User.hbm.xml</value>
+                <value>com/cc/entity/User.hbm.xml</value>
             </list>
         </property>
     </bean>

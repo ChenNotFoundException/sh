@@ -1,10 +1,13 @@
 package com.cc.Action;
 
+import com.cc.Dao.UserDao;
 import com.cc.Service.UserService;
-import com.cc.hibernate.POJO.LoginInfo;
-import com.cc.hibernate.POJO.User;
+import com.cc.entity.User;
 import com.opensymphony.xwork2.ActionSupport;
+import org.omg.CORBA.Request;
+import org.springframework.http.HttpRequest;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class LoginAction extends ActionSupport {
@@ -13,6 +16,15 @@ public class LoginAction extends ActionSupport {
     private UserService userService;
     private String username;
     private String password;
+    private List<User> list;
+
+    public List<User> getList() {
+        return list;
+    }
+
+    public void setList(List<User> list) {
+        this.list = list;
+    }
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -26,7 +38,10 @@ public class LoginAction extends ActionSupport {
 //            return "fail";
 //
 //        }
+
         if (userService.loginVerify(username, password)) {
+            list= userService.find();
+            this.setList(list);
             return SUCCESS;
         }
         return ERROR;
@@ -58,15 +73,7 @@ public class LoginAction extends ActionSupport {
 
     public boolean flag() {
         boolean flag=false;
-        LoginInfo info = new LoginInfo();
-        List list = info.loginQuery(this.getUsername());
-        User user = new User();
-        for (int i = 0; i < list.size(); i++) {
-            user = (User) list.get(i);
-            if (this.username.equals(user.getUser()) && this.password.equals(user.getPaw())) {
-                flag = true;
-            }
-        }
+
         return flag;
 
     }
