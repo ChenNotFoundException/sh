@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" type="text/css" href="login.css" />
+<jsp:include page="head.jsp"></jsp:include>
 <html>
 <head>
     <title>注册</title>

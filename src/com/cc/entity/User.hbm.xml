@@ -5,7 +5,9 @@
 <hibernate-mapping>
 
     <class name="com.cc.entity.User" table="t_account" schema="db_account">
-        <id name="id" column="id"/>
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
         <property name="user" column="user"/>
         <property name="paw" column="paw"/>
     </class>

@@ -16,7 +16,7 @@
     <!-- 数据源的配置，使用C3P0连接池，用户名和密码需要根据实际情况配置 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db_account"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db_account?useUnicode=true&amp;characterEncoding=UTF-8"></property>
         <property name="user" value="root"></property>
         <property name="password" value="123123"></property>
     </bean>
@@ -27,9 +27,9 @@
         <property name="hibernateProperties">
             <props>
                 <!-- 是否需要打印sql语句 -->
-                <prop key="hibernate.show_sql">true</prop>
+                <!--<prop key="hibernate.show_sql">true</prop>-->
                 <!-- 是否对打印的sql语句进行格式化（容易阅读） -->
-                <prop key="hibernate.format_sql">true</prop>
+                <!--<prop key="hibernate.format_sql">true</prop>-->
                 <!-- 是否自动创建表，update:若表存在则更新，不存在则自动创建 -->
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
@@ -61,7 +61,12 @@
     <bean id="registerAction" class="com.cc.Action.LoginAction" scope="prototype">
         <property name="userService" ref="userService"></property>
     </bean>
-
+    <bean id="deleteAction" class="com.cc.Action.OperateAction" scope="prototype">
+        <property name="service" ref="userService"/>
+    </bean>
+    <bean id="updateAction" class="com.cc.Action.OperateAction" scope="prototype">
+        <property name="service" ref="userService"/>
+    </bean>
     <bean id="userService" class="com.cc.Service.UserService">
         <property name="userDao" ref="userDao"></property>
     </bean>

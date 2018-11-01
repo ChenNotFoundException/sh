@@ -16,6 +16,11 @@ public interface UserDao {
     public boolean exist(String username);
 
     public boolean verify(String username, String password);
+    public boolean verify(int id, String password);
+
+    public void deleteUser(int id);
+
+    public void updateUser(int id,String newPaw);
 
     public List<User> findAll();
 }

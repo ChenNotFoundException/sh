@@ -1,5 +1,6 @@
 package com.cc.Dao;
 
+import com.cc.Action.LoginAction;
 import com.cc.entity.User;
 
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -16,11 +17,22 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     public UserDaoImpl() {
     }
+
+
+
     @Resource(name = "hibernateTemplate")
     private HibernateTemplate hibernateTemplate;
 
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
+    }
+
+    @Override
+    public void deleteUser(int id) {
+
+        User user = (User) hibernateTemplate.get(User.class, id);
+        hibernateTemplate.delete(user);
+        System.out.println("删除了 id= "+id+" 的某位");
     }
 
     @Override
@@ -30,6 +42,19 @@ public class UserDaoImpl implements UserDao {
             return true;
         }
         return false;
+    }
+
+
+
+    @Override
+    public void updateUser(int id,String newPaw) {
+        System.out.println("···更新密码中···");
+        User user = hibernateTemplate.get(User.class, id);
+        System.out.println("拿到用户"+user.getUser());
+        user.setPaw(newPaw);
+        hibernateTemplate.update(user);
+        System.out.println("···密码更新完成···");
+
     }
 
     @Override
@@ -43,6 +68,16 @@ public class UserDaoImpl implements UserDao {
     public boolean verify(String username, String password) {
         List list = hibernateTemplate.find("select paw from User u where u.user =?0", username);
         return (list.get(0).toString()).equals(password);
+    }
+
+    @Override
+    public boolean verify(int id, String password) {
+        User user = hibernateTemplate.get(User.class, id);
+        if (user != null) {
+            System.out.println("修改密码用户查询");
+            return true;
+        }else
+        return false;
     }
 
     @Override

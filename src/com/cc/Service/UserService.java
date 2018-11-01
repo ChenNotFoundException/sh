@@ -41,8 +41,16 @@ public class UserService {
         System.out.println("注册。。。。");
         return userDao.addUser(user);
     }
+
     public List<User> find(){
         return userDao.findAll();
     }
 
+    public void deleteUserById(int id) {
+        userDao.deleteUser(id);
+    }
+
+    public void update(int id,String newPaw) {
+        userDao.updateUser(id, newPaw);
+    }
 }

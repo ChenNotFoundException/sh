@@ -111,7 +111,8 @@ body a, form li, input[type="submit"], input[type="text"], .sixth-login input[ty
 	-webkit-transition: 0.1s all;
 	-moz-transition: 0.1s all;
 	-o-transition: 0.1s all;
-} /*--close--*/
+}
+/*--close--*/
 .close {
 	background: url('./img/close.png') no-repeat 0px 0px;
 	cursor: pointer;
@@ -125,6 +126,10 @@ body a, form li, input[type="submit"], input[type="text"], .sixth-login input[ty
 	-o-transition: color 0.2s ease-in-out;
 	transition: color 0.2s ease-in-out;
 } /*--/close--*/
+h2{
+    padding-left: 40% ;
+    padding-right: 40%;
+}
 h1 {
 	font-family: 'Exo 2', sans-serif;
 	text-align: center;
@@ -220,7 +225,26 @@ input[type="submit"] {
 	-o-border-bottom-right-radius: 15px;
 	cursor: pointer;
 }
+input[type="register"] {
+    font-size: 30px;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: #3ea751;
+    width: 30%;
+    text-align: center;
 
+}
+input[type="register"]:hover{
+    background: #ff2775;
+
+    transition: 1s all;
+    -webkit-transition: 1s all;
+    -moz-transition: 1s all;
+    -o-transition: 1s all;
+
+}
 input[type="submit"]:hover {
 	background: #ff2775;
 	border-bottom-left-radius: 15px;

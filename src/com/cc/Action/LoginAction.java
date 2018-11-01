@@ -4,16 +4,20 @@ import com.cc.Dao.UserDao;
 import com.cc.Service.UserService;
 import com.cc.entity.User;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 import org.omg.CORBA.Request;
 import org.springframework.http.HttpRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class LoginAction extends ActionSupport {
 
 
     private UserService userService;
+
     private String username;
     private String password;
     private List<User> list;
@@ -29,7 +33,7 @@ public class LoginAction extends ActionSupport {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-    public String execute() {
+    public String execute() throws UnsupportedEncodingException {
 //        if (flag()) {
 //            System.out.println("登陆成功");
 //            return SUCCESS;
@@ -41,7 +45,12 @@ public class LoginAction extends ActionSupport {
 
         if (userService.loginVerify(username, password)) {
             list= userService.find();
-            this.setList(list);
+            System.out.println("登录用户："+username);
+            System.out.println("密码："+password);
+            //this.setList(list);
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.setCharacterEncoding("UTF-8");
+            request.getSession().setAttribute("list2",list);
             return SUCCESS;
         }
         return ERROR;
@@ -54,6 +63,13 @@ public class LoginAction extends ActionSupport {
             return SUCCESS;
         }
         return ERROR;
+    }
+
+    public String newLogin() throws UnsupportedEncodingException {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        this.username = (String)request.getSession().getAttribute("username");
+        System.out.println(username);
+        return execute();
     }
     public String getUsername() {
         return username;
@@ -71,10 +87,4 @@ public class LoginAction extends ActionSupport {
         this.password = password;
     }
 
-    public boolean flag() {
-        boolean flag=false;
-
-        return flag;
-
-    }
 }

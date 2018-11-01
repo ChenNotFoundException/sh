@@ -6,7 +6,7 @@
 
 <struts>
     <!-- struts2 action 交由spring管理 -->
-    <constant name="struts.objectFactory" value="spring" />
+    <!--<constant name="struts.objectFactory" value="spring" />-->
 
     <constant name="struts.devMode" value="true"></constant>
     <!--class属性中不写action的路径，因为在spring已经配置过了，应该写spring中bean的id-->
@@ -15,9 +15,32 @@
             <result name="success">/success.jsp</result>
             <result name="error" >/fail.jsp</result>
         </action>
-        <action name="registerAction" class="registerAction" method="register">
+        <action name="loginAction2" class="loginAction" method="newLogin">
             <result name="success">/success.jsp</result>
+            <result name="error" >/fail.jsp</result>
+        </action>
+        <action name="registerAction" class="registerAction" method="register">
+            <result name="success" type="redirectAction">
+                <param name="actionName">loginAction</param>
+                <param name="username">${username}</param>
+                <param name="password">${password}</param>
+
+            </result>
             <result name="error">/index.jsp</result>
+        </action>
+        <action name="deleteAction" class="deleteAction" method="delete">
+            <result name="success" type="redirectAction">
+                <param name="actionName">loginAction</param>
+                <param name="username">${username}</param>
+                <param name="password">${password}</param>
+            </result>
+        </action>
+        <action name="updateAction" class="updateAction" method="update">
+            <result name="success" type="redirectAction">
+                <param name="actionName">loginAction2</param>
+                <param name="username">${username}</param>
+                <param name="password">${password}</param>
+            </result>
         </action>
     </package>
 
