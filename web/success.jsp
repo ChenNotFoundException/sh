@@ -32,13 +32,14 @@
            <%--<td><s:property value="paw"/>--%>
        <%--</tr>--%>
    <%--</s:iterator>--%>
-    <%="下面是通过session取值"%>
+<a href="pageAction.action?page=1">分页显示</a>
 
     <table>
         <tr>
             <td>ID</td>
             <td>姓名</td>
             <td>密码</td>
+            <td>操作</td>
         </tr>
 
 <%

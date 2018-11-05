@@ -1,10 +1,8 @@
 package com.cc.Dao;
 
-import com.cc.Action.LoginAction;
 import com.cc.entity.User;
-
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateTemplate;
-import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -45,6 +43,28 @@ public class UserDaoImpl implements UserDao {
     }
 
 
+    @Override
+    public List <User> queryForPage(String hql, int offset, int length) {
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setFirstResult(offset);
+        query.setMaxResults(length);
+        return query.list();
+    }
+
+    @Override
+    public int getCount() {
+        String hql = "select count(*) from User u";
+//        List <User> list = (List <User>) this.hibernateTemplate.find(hql);
+//        System.out.println("UserDaoImpl:" + list.get(0).toString());
+//        if (list != null && list.size() > 0) {
+//            return list.size();
+//        }
+//        return 0;
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql);
+        System.out.println(Integer.parseInt(query.list().get(0).toString()));
+        return Integer.parseInt(query.list().get(0).toString());
+
+    }
 
     @Override
     public void updateUser(int id,String newPaw) {

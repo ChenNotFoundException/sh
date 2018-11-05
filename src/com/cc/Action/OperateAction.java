@@ -46,7 +46,9 @@ public class OperateAction extends ActionSupport {
 
     public String delete() {
         HttpServletRequest request = ServletActionContext.getRequest();
-        request.getAttribute("username");
+        username=(String) request.getSession().getAttribute("username");
+        password=(String) request.getSession().getAttribute("password");
+        System.out.println("第一次登陆用户："+username+"密码"+password);
         service.deleteUserById(this.id);
 
         return SUCCESS;
@@ -56,6 +58,7 @@ public class OperateAction extends ActionSupport {
         HttpServletRequest request = ServletActionContext.getRequest();
 //        System.out.println( request.getParameterMap());
         this.setUsername((String)request.getSession().getAttribute("username"));
+        System.out.println(username+"的密码更新中、、");
         service.update((int)(request.getSession().getAttribute("id")),this.password);
         return SUCCESS;
     }

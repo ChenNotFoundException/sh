@@ -30,7 +30,7 @@
         </action>
         <action name="deleteAction" class="deleteAction" method="delete">
             <result name="success" type="redirectAction">
-                <param name="actionName">loginAction</param>
+                <param name="actionName">loginAction2</param>
                 <param name="username">${username}</param>
                 <param name="password">${password}</param>
             </result>
@@ -41,6 +41,10 @@
                 <param name="username">${username}</param>
                 <param name="password">${password}</param>
             </result>
+        </action>
+
+        <action name="pageAction" class="pageAction" method="getPageList">
+            <result name="success">/PageList.jsp</result>
         </action>
     </package>
 

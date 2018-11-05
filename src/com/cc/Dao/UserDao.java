@@ -22,5 +22,9 @@ public interface UserDao {
 
     public void updateUser(int id,String newPaw);
 
+    public List <User> queryForPage(String hql, int offset, int length);
+
+    public int getCount();
+
     public List<User> findAll();
 }

@@ -42,15 +42,17 @@ public class LoginAction extends ActionSupport {
 //            return "fail";
 //
 //        }
-
+        HttpServletRequest request = ServletActionContext.getRequest();
         if (userService.loginVerify(username, password)) {
             list= userService.find();
             System.out.println("登录用户："+username);
             System.out.println("密码："+password);
             //this.setList(list);
-            HttpServletRequest request = ServletActionContext.getRequest();
+
             request.setCharacterEncoding("UTF-8");
             request.getSession().setAttribute("list2",list);
+            request.getSession().setAttribute("username",username);
+            request.getSession().setAttribute("password",password);
             return SUCCESS;
         }
         return ERROR;
@@ -68,7 +70,7 @@ public class LoginAction extends ActionSupport {
     public String newLogin() throws UnsupportedEncodingException {
         HttpServletRequest request = ServletActionContext.getRequest();
         this.username = (String)request.getSession().getAttribute("username");
-        System.out.println(username);
+//        System.out.println(username);
         return execute();
     }
     public String getUsername() {

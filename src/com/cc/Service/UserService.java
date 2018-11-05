@@ -1,12 +1,10 @@
 package com.cc.Service;
 
 import com.cc.Dao.UserDao;
-
 import com.cc.entity.User;
-import org.springframework.stereotype.Service;
+import com.cc.utils.PageBean;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -42,15 +40,34 @@ public class UserService {
         return userDao.addUser(user);
     }
 
-    public List<User> find(){
-        return userDao.findAll();
-    }
-
     public void deleteUserById(int id) {
         userDao.deleteUser(id);
     }
 
     public void update(int id,String newPaw) {
         userDao.updateUser(id, newPaw);
+    }
+
+    public List <User> find() {
+        return userDao.findAll();
+    }
+
+    public PageBean queryForPage(int pageSize, int Page) {
+        String hql = "select count(*) from User ";
+        int count = userDao.getCount();
+        int totalPage = PageBean.countTotalPage(pageSize, count);
+
+        int length = pageSize;
+        int currentPage = PageBean.countCurrentPage(Page);
+        int offset = PageBean.countOffset(pageSize, currentPage);
+        List <User> list = userDao.queryForPage("from User u", offset, length);
+        PageBean pageBean = new PageBean();
+        pageBean.setPageSize(pageSize);
+        pageBean.setCurrentPage(currentPage);
+        pageBean.setAllRow(count);
+        pageBean.setTotalPage(totalPage);
+        pageBean.setList(list);
+        pageBean.init();
+        return pageBean;
     }
 }
